@@ -1,0 +1,31 @@
+Private Sub cmdGravar_Click()
+
+'Ativar a primeira planilha
+'ThisWorkbook.Worksheets("01").Activate  '<-------------------------------------------------ADICIONA A WORKSHEET "XX"
+'Selecionar a célula A3
+ActiveSheet.Select
+Range("A2").Select
+
+'Procurar a primeira célula vazia
+Do
+If Not (IsEmpty(ActiveCell)) Then
+ActiveCell.Offset(1, 0).Select
+End If
+Loop Until IsEmpty(ActiveCell) = True
+
+'Carregar os dados digitados nas caixas de texto para a planilha
+ActiveCell.Value = cboTIPO.Value
+ActiveCell.Offset(0, 1).Value = txtSEQ.Value
+ActiveCell.Offset(0, 2).Value = cboCLIENTE.Value
+ActiveCell.Offset(0, 3).Value = txtDESCR.Value
+ActiveCell.Offset(0, 4).Value = CCur(txtVALOR.Value)
+'Limpar as caixas de texto E COMBINAÇÃO
+cboTIPO.Value = Empty
+txtSEQ.Value = Empty
+cboCLIENTE.Value = Empty
+txtDESCR.Value = Empty
+txtVALOR.Value = Empty
+
+cboTIPO.SetFocus
+
+End Sub
